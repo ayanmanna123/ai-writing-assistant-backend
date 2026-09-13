@@ -26,7 +26,9 @@ const rewriteSchema = z.object({
     WRITING_MODES.FRIENDLY,
     WRITING_MODES.CASUAL,
     WRITING_MODES.SHORTEN,
-    WRITING_MODES.EXPAND
+    WRITING_MODES.EXPAND,
+    WRITING_MODES.BANGLISH,
+    WRITING_MODES.HINGLISH
   ], {
     invalid_type_error: 'Invalid rewrite mode specified'
   }).default(WRITING_MODES.PROFESSIONAL),
