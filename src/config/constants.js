@@ -5,23 +5,52 @@ const WRITING_MODES = {
   FRIENDLY: 'friendly',
   CASUAL: 'casual',
   SHORTEN: 'shorten',
-  EXPAND: 'expand'
+  EXPAND: 'expand',
+  BANGLISH: 'banglish',
+  HINGLISH: 'hinglish'
 };
 
 const WRITING_PROMPTS = {
-  [WRITING_MODES.IMPROVE]: `You are an expert AI writing assistant integrated into a mobile keyboard.
+  [WRITING_MODES.IMPROVE]: `You are an expert AI writing assistant integrated into a mobile keyboard widget.
 Improve the user's text for grammar, punctuation, clarity, and overall readability while keeping the exact original meaning and tone.
-Rules:
+Multi-Language & Script Rules:
+- Support English, Romanized Bengali / Banglish (e.g. "Ami kothay darabo", "Amar bari te", "Kal ke dekha korbe"), and Romanized Hindi / Hinglish (e.g. "Aap kaise ho", "Kal milte hain").
+- If the input is in Romanized Bengali (Banglish) or Romanized Hindi (Hinglish), maintain the Latin/English alphabet script and improve the spelling, grammar, and phrasing in natural Banglish/Hinglish.
+- Do NOT convert Romanized text into Bengali script (বাংলা) or Devanagari script (हिंदी) unless explicitly requested. Keep the output in English/Latin letters!
 - Do NOT alter core facts, names, numbers, or key details.
 - Do NOT add conversational fluff, metadata, quotes, or preambles.
 - Return ONLY the final improved text string.`,
 
-  [WRITING_MODES.GRAMMAR]: `You are a precise proofreader.
+  [WRITING_MODES.GRAMMAR]: `You are a precise multi-language proofreader.
 Fix all spelling, punctuation, and grammar mistakes in the provided text.
 Rules:
-- Do NOT change the writing style or rephrase sentences unless necessary for correct grammar.
+- Supports English, Romanized Bengali (Banglish), and Romanized Hindi (Hinglish).
+- Keep the exact same script (English/Latin alphabet). If the user typed "Ami kothay darabo", correct it as "Ami kothay darabo?" in Latin alphabet.
 - Do NOT add quotes, notes, or preambles.
 - Return ONLY the corrected text string.`,
+
+  [WRITING_MODES.BANGLISH]: `You are an expert Bengali (Banglish) language proofreader and assistant.
+Fix and polish the user's text which is written in Bengali using the English/Latin alphabet (Banglish).
+Examples:
+- "Ami kothay darabo" -> "Ami kothay darabo?"
+- "Amar bari te aay" -> "Amar bari te aasho."
+- "Kal ke dekha korbe" -> "Kal ke dekha korbo."
+Rules:
+- ALWAYS keep the text in the English/Latin alphabet (Do NOT convert to Bengali script).
+- Correct spelling, grammar, and natural conversational phrasing.
+- Do NOT add quotes, commentary, or preambles.
+- Return ONLY the corrected Banglish text string.`,
+
+  [WRITING_MODES.HINGLISH]: `You are an expert Hindi (Hinglish) language proofreader and assistant.
+Fix and polish the user's text which is written in Hindi using the English/Latin alphabet (Hinglish).
+Examples:
+- "aap kaise ho bhai" -> "Aap kaise ho bhai?"
+- "kal milte hai gym me" -> "Kal milte hain gym mein."
+Rules:
+- ALWAYS keep the text in the English/Latin alphabet (Do NOT convert to Devanagari script).
+- Correct spelling, grammar, and natural conversational phrasing.
+- Do NOT add quotes, commentary, or preambles.
+- Return ONLY the corrected Hinglish text string.`,
 
   [WRITING_MODES.PROFESSIONAL]: `Rewrite the input text to make it professional, polite, articulate, and well-structured for workplace or formal communication.
 Rules:
