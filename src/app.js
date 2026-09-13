@@ -8,6 +8,9 @@ const { errorHandler, notFoundHandler } = require('./middleware/error.middleware
 
 const app = express();
 
+// Trust proxy for reverse proxy platforms like Render
+app.set('trust proxy', 1);
+
 // Security and CORS middlewares
 app.use(helmet());
 app.use(cors({ origin: config.corsOrigin }));
