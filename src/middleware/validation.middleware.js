@@ -4,7 +4,7 @@ const { WRITING_MODES } = require('../config/constants');
 const improveSchema = z.object({
   text: z.string({
     required_error: 'Text field is required'
-  }).min(1, 'Text cannot be empty').max(5000, 'Text exceeds maximum length of 5000 characters'),
+  }).min(1, 'Text cannot be empty').max(100000, 'Text exceeds maximum length of 100000 characters'),
   tone: z.string().optional().default('natural'),
   creativity: z.number().min(0).max(1).optional().default(0.3)
 });
@@ -12,13 +12,13 @@ const improveSchema = z.object({
 const grammarSchema = z.object({
   text: z.string({
     required_error: 'Text field is required'
-  }).min(1, 'Text cannot be empty').max(5000, 'Text exceeds maximum length of 5000 characters')
+  }).min(1, 'Text cannot be empty').max(100000, 'Text exceeds maximum length of 100000 characters')
 });
 
 const rewriteSchema = z.object({
   text: z.string({
     required_error: 'Text field is required'
-  }).min(1, 'Text cannot be empty').max(5000, 'Text exceeds maximum length of 5000 characters'),
+  }).min(1, 'Text cannot be empty').max(100000, 'Text exceeds maximum length of 100000 characters'),
   mode: z.enum([
     WRITING_MODES.IMPROVE,
     WRITING_MODES.GRAMMAR,

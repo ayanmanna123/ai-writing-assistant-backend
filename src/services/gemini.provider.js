@@ -48,7 +48,7 @@ class GeminiProvider extends AIService {
           contents: [{ role: 'user', parts: [{ text: fullPrompt }] }],
           generationConfig: {
             temperature: options.creativity || 0.3,
-            maxOutputTokens: 1024
+            maxOutputTokens: 8192
           }
         });
         const response = await result.response;
@@ -66,7 +66,7 @@ class GeminiProvider extends AIService {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           contents: [{ parts: [{ text: fullPrompt }] }],
-          generationConfig: { temperature: options.creativity || 0.3, maxOutputTokens: 1024 }
+          generationConfig: { temperature: options.creativity || 0.3, maxOutputTokens: 8192 }
         })
       });
 
